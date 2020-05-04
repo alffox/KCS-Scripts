@@ -38,5 +38,6 @@ tinymce.activeEditor.formatter.register('codeformat', {
 
 // Add function to the button
 codeFormatButton.addEventListener("click", function () {
+    tinymce.activeEditor.focus();
     tinymce.activeEditor.formatter.toggle('codeformat');
 });
