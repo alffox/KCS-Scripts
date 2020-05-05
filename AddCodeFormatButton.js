@@ -37,7 +37,17 @@ tinymce.activeEditor.formatter.register('codeformat', {
 });
 
 // Add function to the button
-codeFormatButton.addEventListener("click", function () {
+codeFormatButton.onclick = function (e) {
     tinymce.activeEditor.focus();
     tinymce.activeEditor.formatter.toggle('codeformat');
+    tinymce.DOM.toggleClass(e.currentTarget, 'src-components-EditorToolbar-ToolbarButton---active---3qTSV');
+}
+
+// Add event listener to check <code> markup everywhere on the active editor
+tinymce.activeEditor.on('click', function (e) {
+    if ((tinymce.activeEditor.selection.getNode().nodeName) == "CODE") {
+        codeFormatButton.classList.add('src-components-EditorToolbar-ToolbarButton---active---3qTSV');
+    } else {
+        codeFormatButton.classList.remove('src-components-EditorToolbar-ToolbarButton---active---3qTSV');
+    }
 });
