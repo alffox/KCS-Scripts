@@ -26,20 +26,27 @@ function handleDIV() {
 
         const allEditorH2 = tinymce.activeEditor.contentDocument.getElementsByTagName("h2");
         let resolutionH2;
+        let additionalInformationH2;
 
-        for (var i = 0; i < allEditorH2.length; i++) {
-            if (allEditorH2[i].textContent == "Resolution") { // Finds the Resolution <h2> node
-                resolutionH2 = allEditorH2[i];
-                if (resolutionH2.nextSibling.tagName != 'DIV') {
-                    tinymce.dom.DomQuery(resolutionH2.nextSibling).wrapAll('<div>'); // Adds DIVs around the resolution text, if missing
-                    console.log('No DIV was found, the script added it');
-                } else {
-                    console.log('markup is ok, no changes done');
-                }
+        fixDIV(allEditorH2, resolutionH2, "Resolution");
+        fixDIV(allEditorH2, additionalInformationH2, "Additional Information");
+
+    } else {
+        console.log("The current article is a KCS, proceeding with DIV fixing, script will now exit");
+        return;
+    }
+}
+
+function fixDIV(allEditorH2, KCSH2Elem, KCSH2Text) {
+    for (var i = 0; i < allEditorH2.length; i++) {
+        if (allEditorH2[i].textContent == KCSH2Text) { // Finds the Resolution <h2> node
+            KCSH2Elem = allEditorH2[i];
+            if (KCSH2Elem.nextSibling.tagName != 'DIV') {
+                tinymce.dom.DomQuery(div.nextSibling).wrapAll('<div>'); // Adds DIVs around the resolution text, if missing
+                console.log('No DIV was found after ' + KCSH2Text + ', the script added it');
+            } else {
+                console.log('markup after ' + KCSH2Text + ' is ok, no changes done');
             }
         }
-    } else {
-        console.log("The current article is not a KCS, exit with no changes done");
-        return;
     }
 }
