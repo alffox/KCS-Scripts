@@ -42,7 +42,7 @@ function fixDIV(allEditorH2, KCSH2Elem, KCSH2Text) {
         if (allEditorH2[i].textContent == KCSH2Text) { // Finds the Resolution <h2> node
             KCSH2Elem = allEditorH2[i];
             if (KCSH2Elem.nextSibling.tagName != 'DIV') {
-                tinymce.dom.DomQuery(KCSH2Elem.nextSibling).wrapAll('<div>'); // Adds DIVs around the resolution text, if missing
+                tinymce.dom.DomQuery(KCSH2Elem).nextUntil().wrapAll('<div>'); // Adds DIVs around the resolution text, if missing
                 console.log('No DIV was found after ' + KCSH2Text + ', the script added it');
             } else {
                 console.log('markup after ' + KCSH2Text + ' is ok, no changes done');
